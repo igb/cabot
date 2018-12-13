@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="foo" height="1000" width="1000" style="border:1px solid #000000;"/>
+<script>
+var canvas = document.getElementById("foo");
+var ctxt =  canvas.getContext("2d");
+
+var imageData = ctxt.getImageData(0, 0, ctxt.canvas.height, ctxt.canvas.width)
+console.log("width:" + ctxt.canvas.width);
+console.log("height:" + ctxt.canvas.height);
+console.log(imageData.data);
+var data = imageData.data;
+for (var i=0; i < data.length; i += 4) {
+		  var fill;
+		  if (i < ctxt.canvas.width * 4 -1) {
+			  fill = Math.getRandomInt(2) == 1;
+		  } else {
+			  fill = false;
+		  }
+
+		  data[i + 0] = fill ? 0 : 255;    // R value
+		  data[i + 1] = fill ? 0 : 255;  // G value
+		  data[i + 2] = fill ? 0 : 255;    // B value
+		  data[i + 3] = 255;  // A value
+}
+
+ imageData = new ImageData(data, ctxt.canvas.width, ctxt.canvas.height);
+ctxt.putImageData(imageData, 0, 0);
+
+</script>
+</body>
+</html>
