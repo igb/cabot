@@ -1,9 +1,8 @@
 
 function applyRule(left_parent, middle_parent, right_parent) {
     console.log(left_parent + " " +  middle_parent + " " + right_parent);
+    console.log((left_parent ? "1" : "0") +  (middle_parent ? "1" : "0") +  (right_parent ? "1" : "0"));
     var input = parseInt((left_parent ? "1" : "0") +  (middle_parent ? "1" : "0") +  (right_parent ? "1" : "0"), 2);
-    //switch(input) {
-    //     case 01011010
     console.log(input);
 }
 
@@ -32,13 +31,25 @@ function getRightParent(i, data) { // wrap to last element of parent line if at 
     }
 }
 
+function getRule(ruleNumber) {
+    var rule = [0,0,0,0,0,0,0,0];
+    var binaryRuleNumber = ruleNumber.toString(2);
+    for (var i = binaryRuleNumber.length - 1; i >= 0; i--) {
+	rule[i] = binaryRuleNumber[i] == '1' ? 255 : 0;
+    }
+    return rule.reverse();
+}
+
+
 var canvas = document.getElementById("foo");
 var ctxt =  canvas.getContext("2d");
 
 var imageData = ctxt.getImageData(0, 0, ctxt.canvas.height, ctxt.canvas.width);
+
 console.log("width:" + ctxt.canvas.width);
 console.log("height:" + ctxt.canvas.height);
 console.log(imageData.data);
+
 var data = imageData.data;
 for (var i=0; i < data.length; i += 4) {
 		  var fill;
