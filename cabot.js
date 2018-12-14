@@ -2,6 +2,9 @@ var fs = require("fs");
 var Canvas = require("canvas");
 
 
+var ruleNumber =  Math.floor(Math.random() * Math.floor(256));
+var randomInitialState = Math.floor(Math.random() * Math.floor(2));
+
 function applyRule(left_parent, middle_parent, right_parent, rule_number) {
 
     var input = parseInt((left_parent ? "1" : "0") +  (middle_parent ? "1" : "0") +  (right_parent ? "1" : "0"), 2);
@@ -50,27 +53,28 @@ var ctxt =  canvas.getContext("2d");
 var imageData = ctxt.getImageData(0, 0, ctxt.canvas.height, ctxt.canvas.width);
 
 
-//var ruleString = document.location.search;
-//ruleString = ruleString.substring(1, ruleString.length);
-//console.log(getRule(parseInt(ruleString)));
 
 var data = imageData.data;
 for (var i=0; i < data.length; i += 4) {
 		  var fill;
 		  if (i < ctxt.canvas.width * 4 -1) {
+		      if (randomInitialState == 1) {
+			  console.log("rando!");
 			  fill = Math.floor(Math.random() * 2)  == 1;
-			  	   if (i == 512 * 4) {
+		      } else {
+			  if (i == (ctxt.canvas.width / 2) * 4) {
 			      fill = 1;
 			  } else {
 			      fill = 0;
-			      }
+			  }
+		      }
 		  } else {
 
 			  
 		      var left_parent = getLeftParent(i, data);
 		      var middle_parent = getMiddleParent(i, data);
 		      var right_parent = getRightParent(i, data);
-		      fill = applyRule(left_parent, middle_parent, right_parent, 90);
+		      fill = applyRule(left_parent, middle_parent, right_parent, ruleNumber);
 		  }
 
 		  data[i + 0] = fill ? 0 : 255;    // R value
