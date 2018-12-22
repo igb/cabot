@@ -151,13 +151,6 @@ drawGrid(ruleNumber, randomInitialState, 8192, 8192, 1, 50, -501.75, "img050.png
 drawGrid(ruleNumber, randomInitialState, 8192, 8192, 1, 100, -506.8828125, "img100.png"); 
 
 
-/*
-for (var i = 36; i <= 100; i++) {
-    console.log("Trying Scale factor: " + i);
-       search(-400, -500, 512, drawGrid, [90, 0, 8192, 8192, 1, i]);
-
-}
-*/
 function search(min, max, expectedResult, func, args) {
     var initialCondition = min + ((max - min) / 2);
     
