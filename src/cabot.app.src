@@ -1,0 +1,14 @@
+{application, cabot,
+ [
+  {description, "An Erlang twitter bot for posting elementary cellular automata images"},
+  {vsn, "1.1"},
+  {modules, [
+             cabot
+            ]},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {env, []}
+ ]}.
